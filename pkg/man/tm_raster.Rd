@@ -100,6 +100,6 @@ tm_layout(inner.margins=0,
     title.position = c("left", "bottom"), title.bg.color="gray80")
 }
 \seealso{
-\href{../doc/tmap-nutshell.html}{\code{vignette("tmap-nutshell")}}
+\href{../vignettes/tmap-nutshell.html}{\code{vignette("tmap-nutshell")}}
 }
 

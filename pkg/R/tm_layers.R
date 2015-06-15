@@ -228,8 +228,8 @@ tm_polygons <- function(col="grey85",
 #' @param legend.z index value that determines the position of the legend element with respect to other legend elements. The legend elements are stacked according to their z values. The legend element with the lowest z value is placed on top.
 #' @param legend.hist.z index value that determines the position of the histogram legend element 
 #' @export
-#' @example ../examples/tm_raster.r
-#' @seealso \href{../doc/tmap-nutshell.html}{\code{vignette("tmap-nutshell")}}
+#' @example ../examples/tm_raster.R
+#' @seealso \href{../vignettes/tmap-nutshell.html}{\code{vignette("tmap-nutshell")}}
 #' @return \code{\link{tmap-element}}	
 tm_raster <- function(col="grey70",
 					  alpha = NA,
