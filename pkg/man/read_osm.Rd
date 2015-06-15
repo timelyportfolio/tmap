@@ -4,21 +4,20 @@
 \alias{read_osm}
 \title{Read Open Street Map data (prototype)}
 \usage{
-read_osm(x, use.raster = FALSE, poly = NULL, point = NULL, line = NULL,
-  ...)
+read_osm(x, raster = FALSE, poly = NULL, point = NULL, line = NULL, ...)
 }
 \arguments{
 \item{x}{bounding box or \code{\link[osmar:osmar]{osmar}} object}
 
-\item{poly}{specifies the polygons selection via either \code{\link[osmar:node]{node}}, \code{\link[osmar:way]{way}}, or \code{\link[osmar:relation]{relation}}}
+\item{raster}{logical that determines whether a raster or a vector shapes are returned}
 
-\item{point}{specifies the points selection via either \code{\link[osmar:node]{node}}, \code{\link[osmar:way]{way}}, or \code{\link[osmar:relation]{relation}}}
+\item{poly}{specifies the polygons selection}
 
-\item{line}{specifies the lines selection via either \code{\link[osmar:node]{node}}, \code{\link[osmar:way]{way}}, or \code{\link[osmar:relation]{relation}}}
+\item{point}{specifies the points selection}
+
+\item{line}{specifies the lines selection}
 
 \item{...}{arguments passed on to \code{\link[OpenStreetMap:openmap]{openmap}}, most importantly, \code{zoom} and \code{type}}
-
-\item{raster}{logical that determines whether a raster or a vector shapes are returned}
 }
 \description{
 Read Open Street Map data, either vector or raster based.

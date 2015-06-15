@@ -4,9 +4,9 @@
 #' 
 #' @param x bounding box or \code{\link[osmar:osmar]{osmar}} object
 #' @param raster logical that determines whether a raster or a vector shapes are returned
-#' @param poly specifies the polygons selection}}
-#' @param point specifies the points selection}}
-#' @param line specifies the lines selection}}
+#' @param poly specifies the polygons selection
+#' @param point specifies the points selection
+#' @param line specifies the lines selection
 #' @param ... arguments passed on to \code{\link[OpenStreetMap:openmap]{openmap}}, most importantly, \code{zoom} and \code{type}
 #' @import osmar
 #' @import OpenStreetMap
@@ -66,4 +66,15 @@ read_osm <- function(x, raster=FALSE, poly=NULL, point=NULL, line=NULL, ...) {
 	if (length(shps)==1) {
 		shps[[1]]
 	} else shps
+}
+
+
+#' Utility function to plot a raster OSM image
+#' Plots a raster image obtained through \code{read_osm}.
+#' 
+#' @param var name of the variable used to plot the raster image. Shouldn't need to be altered.
+#' @export
+
+tm_osm_raster <- function(var = "PIXEL__COLOR") {
+	tm_raster(var)
 }
