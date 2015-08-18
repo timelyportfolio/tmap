@@ -135,6 +135,26 @@ itmap <- function(tm, file=NULL, width = NULL, height = NULL ) {
 	invisible(xpathApply(tmap_svg,"//*[local-name()='g'][contains(@id,'mapFrame')]",removeNodes))
 	# remove mapBG
 	removeNodes(getNodeSet(tmap_svg,"//*[contains(@id,'mapBG')]")[[1]])
+	
+	# CSS ids must be unique.  Very likely ids will conflict
+	#  if more than one tmap on a single HTML page.
+	#  Convert all ids into classes.
+	xpathApply(
+		tmap_svg
+		,"//*[@id]"
+		,function(el_with_id){
+			old_attrs <- xmlAttrs( el_with_id )
+			new_attrs <- old_attrs[which(names(old_attrs) != "id")]
+			if('class' %in% names(old_attrs)){
+				new_attrs["class"] <- paste0(old_attrs["class"],old_attrs["id"],collapse=" ")
+			} else {
+				new_attrs["class"] <- old_attrs["id"]
+			}
+			removeAttributes(el_with_id)
+			xmlAttrs(el_with_id) <- new_attrs
+			invisible(return(NULL))
+		}
+	)
 
 	if(is.null(width) || is.null(height)){
 		width <- xmlAttrs(xmlRoot(tmap_svg))[["width"]]
