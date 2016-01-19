@@ -14,4 +14,40 @@ require(dplyr)
 			   title.size="Metro population", 
 			   title.col="Growth rate (%)", id="name") + 
 	tm_layout(legend.bg.color = "grey90", legend.bg.alpha=.5, legend.frame=TRUE, asp=0)) %>% 
-itmap()
+itmap() -> itm
+
+
+#try to fix zoom issue caused by scale -1 on y
+itm$x$config$beforeZoom = htmlwidgets::JS("
+function(oldz,newz){
+	this.zooming = true;
+	this.zoomchange = newz - oldz;
+	return newz
+}
+")
+itm$x$config$onZoom = htmlwidgets::JS("
+function(newz){this.zooming = false; return newz}
+")
+itm$x$config$beforePan = htmlwidgets::JS("
+function(oldp, newp){
+  if(this.zooming){
+	debugger;
+	if((this.zoomchange > 0 && newp.y < oldp.y) ||
+	   (this.zoomchange < 0 && newp.y > oldp.y)) 
+	{
+		//expect pan change to be same sign as zoom change
+		newp.y = oldp.y - (newp.y - oldp.y)
+	}
+	//newp.y = newp.y + 25 * 
+	//		 (this.zoomchange === Math.abs(this.zoomchange)? 1 : -1) *
+	//		 Math.max(.75,Math.min(this.getZoom(),1.25));
+  }
+  return newp;
+}
+")
+itm$x$config$onPan = htmlwidgets::JS("
+function(newp){
+  return newp;
+}
+")
+itm
